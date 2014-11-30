@@ -5,7 +5,9 @@ import jade.core.Agent;
 public class ColorAgent extends Agent {
 
 	protected void setup() {
-		System.out.println("New color agent is now created");
+		System.out.println("New color agent is now created: " + getLocalName());
 		AgentGraph graph = (AgentGraph) getArguments()[0];
-	  } 
+	  }
+	
+	
 }
