@@ -3,6 +3,7 @@ import ift605.tp3.commons.AgentGraph;
 import jade.core.Agent;
 
 public class ColorAgent extends Agent {
+	private static final long serialVersionUID = 1L;
 
 	protected void setup() {
 		System.out.println("New color agent is now created: " + getLocalName());

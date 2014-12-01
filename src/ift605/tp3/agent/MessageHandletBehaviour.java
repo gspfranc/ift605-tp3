@@ -1,20 +1,14 @@
-package ift605.tp3;
+package ift605.tp3.agent;
 import ift605.tp3.commons.AgentGraph;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import jade.lang.acl.UnreadableException;
 
-import java.awt.Color;
-import java.io.IOException;
-
-
-@SuppressWarnings("serial")
 public class MessageHandletBehaviour extends CyclicBehaviour{
-
+	private static final long serialVersionUID = 1L;
+	
 	AgentGraph graph;	
 	public MessageHandletBehaviour(AgentGraph graph) {
-		super();
 		this.graph = graph;
 	}
 
@@ -29,7 +23,7 @@ public class MessageHandletBehaviour extends CyclicBehaviour{
 			switch (message.getPerformative()) {
 				
 			case ACLMessage.INFORM:
-				//Tester si le noeuds courant peux accepter la couleur proposé
+				//Tester si le noeuds courant peux accepter la couleur proposï¿½
 			
 			case ACLMessage.CONFIRM:
 				// l'agent confirme que c'est OK de son bords
