@@ -1,6 +1,6 @@
 package ift605.tp3.main;
 
-import ift605.tp3.ColorAgent;
+import ift605.tp3.agent.ColorAgent;
 import ift605.tp3.commons.AgentGraph;
 import ift605.tp3.commons.Node;
 import ift605.tp3.commons.Vertex;

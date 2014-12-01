@@ -24,7 +24,7 @@ public class Vertex {
 	}
 	
 	public Node getRandomInvalidNode() {
-		if(!isColorSame() || isPartialVertex){
+		if(isPartialVertex || !isColorSame()){
 			return null;
 		} else {
 			int i = random.nextInt(1);
