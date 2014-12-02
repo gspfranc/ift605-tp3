@@ -9,5 +9,11 @@ public class ColorAgent extends Agent {
 		System.out.println("New color agent is now created: " + getLocalName());
 		AgentGraph graph = (AgentGraph) getArguments()[0];
 		this.addBehaviour(new ColorLocalNodeBehaviour(graph));
-	  } 
+		this.addBehaviour(new ListenerColorEdgeBehavior(graph));
+	  }
+	
+	
+	
+	
+	
 }

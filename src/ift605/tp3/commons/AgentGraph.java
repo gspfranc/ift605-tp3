@@ -1,17 +1,24 @@
 package ift605.tp3.commons;
 
+import jade.core.AID;
+import jade.util.leap.HashSet;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.Vector;
 
 public class AgentGraph {
 	private String agentName;
 	private List<Node> nodeList;
 	private List<Vertex> vertexList;
+	private Set<AID> confirmedEdge;
 
 	public AgentGraph(String agentName, List<Node> nodeList, List<Vertex> vertexList) {
 		this.agentName = agentName;
 		this.nodeList = nodeList;
 		this.vertexList = vertexList;
+		this.confirmedEdge = new java.util.HashSet<AID>();
 	}
 
 	private Node getUncoloredNode() {
@@ -99,6 +106,24 @@ public class AgentGraph {
 	public void setVertexList(List<Vertex> vertexList) {
 		this.vertexList = vertexList;
 	}
+	
+	
+	public void confirmeEdge(AID sender){
+		this.confirmedEdge.add(sender);
+	}
+	
+	public void deleteConfirmedEdges(AID sender) {
+		this.confirmedEdge.remove(sender);
+	}
+	
+	public void deleteAllConfirmedEdges() {
+		System.out.println("delete all");
+		this.confirmedEdge.clear();
+	}	
+	public int numberOfConfirmationEdges() {
+		return this.confirmedEdge.size();
+	}	
+	
 
 	@Override
 	public String toString() {

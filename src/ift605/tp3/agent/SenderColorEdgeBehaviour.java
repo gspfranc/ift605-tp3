@@ -34,6 +34,5 @@ public class SenderColorEdgeBehaviour extends OneShotBehaviour {
 				e.printStackTrace();
 			}							
 		}
-		this.myAgent.addBehaviour(new ListenerColorEdgeBehavior(graph));
 	}
 }

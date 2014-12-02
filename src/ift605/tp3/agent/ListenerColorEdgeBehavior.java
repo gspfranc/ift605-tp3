@@ -1,21 +1,26 @@
 package ift605.tp3.agent;
 
 import java.util.List;
+import java.util.Vector;
 
 import ift605.tp3.commons.AgentGraph;
 import ift605.tp3.commons.Node;
 import ift605.tp3.commons.Vertex;
+import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 
-public class ListenerColorEdgeBehavior extends CyclicBehaviour {
+public class ListenerColorEdgeBehavior extends SimpleBehaviour {
 	private static final long serialVersionUID = 1L;
 	
 	AgentGraph graph;	
+	Vector<AID> confirmedSender;
 	public ListenerColorEdgeBehavior(AgentGraph graph) {
 		this.graph = graph;
+		this.confirmedSender = new Vector<AID>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -31,6 +36,7 @@ public class ListenerColorEdgeBehavior extends CyclicBehaviour {
 			switch (message.getPerformative()) {
 			case ACLMessage.PROPOSE:
 				try {
+					System.out.println("received PROPOSE msg : "+ this.myAgent.getLocalName());
 					boolean noError = true;
 					List<Vertex> edgeVertex = (List<Vertex>) message.getContentObject();
 					
@@ -41,7 +47,7 @@ public class ListenerColorEdgeBehavior extends CyclicBehaviour {
 						if (remoteNode.getColor() == localNode.getColor()) {
 							noError = false;
 							graph.eraseAll();
-							
+							graph.deleteAllConfirmedEdges();
 							// Clear message stack
 							while (this.myAgent.receive() != null);						
 							
@@ -61,6 +67,10 @@ public class ListenerColorEdgeBehavior extends CyclicBehaviour {
 				}
 	
 			case ACLMessage.CONFIRM:
+			jade.core.AID sender = 	message.getSender();
+			graph.confirmeEdge(sender);
+			System.out.println("("+this.graph.numberOfConfirmationEdges()+") received CONFIRM msg : "+ this.myAgent.getLocalName());
+				
 				break;
 			default:
 				break;
@@ -68,5 +78,17 @@ public class ListenerColorEdgeBehavior extends CyclicBehaviour {
 		} else {
 			block();
 		}
+	}
+
+	@Override
+	public boolean done() {
+		
+		if(this.graph.numberOfConfirmationEdges() == 2){
+			System.out.println("done: "+this.myAgent.getLocalName());
+			//this.myAgent.doSuspend();
+		//	return true;
+		}
+
+		return false;
 	}
 }

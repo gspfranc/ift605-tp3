@@ -4,12 +4,12 @@ import ift605.tp3.agent.ColorAgent;
 import ift605.tp3.commons.AgentGraph;
 import ift605.tp3.commons.Node;
 import ift605.tp3.commons.Vertex;
-
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
+import jade.wrapper.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,10 +159,33 @@ public class Main {
 			Object[] o3 = new Object[1];
 			o3[0] = agentGraphC;
 			AgentController ac3 = cc.createNewAgent("agent_C", ColorAgent.class.getName() , o3);
-
+			
 			ac3.start();
 			ac2.start();
 			ac1.start();
+		
+			while(true){
+			
+			if( ac1.getState().getName() == "Idle" 
+					&& ac2.getState().getName() == "Idle"
+					&& ac3.getState().getName() == "Idle"){
+				
+				System.out.println(agentGraphA);
+				System.out.println(agentGraphB);
+				System.out.println(agentGraphC);
+				ac1.kill();
+				ac2.kill();
+				ac3.kill();				
+				System.exit(0);
+			}
+			
+			
+			
+			}
+			
+			
+
+			
 		} catch (StaleProxyException e1) {
 			e1.printStackTrace();
 		}
