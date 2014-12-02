@@ -1,12 +1,10 @@
 package ift605.tp3.commons;
 
 import jade.core.AID;
-import jade.util.leap.HashSet;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 public class AgentGraph {
 	private String agentName;
@@ -49,17 +47,16 @@ public class AgentGraph {
 		// return null if no local node to color
 		return node;
 	}
-	
+
 	public void eraseAll() {
 		for (Node n : nodeList) {
 			n.setColor(null);
-			n.setIsModifiable(true);
 		}
 	}
-	
+
 	public List<Vertex> getEdgeVertexForAgent(String agentName) {
 		List<Vertex> edgeNodes = new ArrayList<Vertex>();
-		
+
 		for(Vertex vertex : vertexList) {
 			if(vertex.isPartialVertex()) {
 				if(agentName.equals(Node.getNodeAgentName(vertex.getNodeB().getId()))) 
@@ -68,20 +65,20 @@ public class AgentGraph {
 		}
 		return edgeNodes;
 	}
-	
+
 	public List<String> getOtherAgentsName(){
 		List<String> agentName = new ArrayList<String>();
-		
+
 		if (this.agentName != "agent_A")
 			agentName.add("agent_A");
 		if (this.agentName != "agent_B")
 			agentName.add("agent_B");
 		if (this.agentName != "agent_C")
 			agentName.add("agent_C");
-		
+
 		return agentName;
 	}
-	
+
 	public Node getNodeById(int id){
 		for(Node node : nodeList){
 			if(node.getId().equals(id)){
@@ -91,49 +88,31 @@ public class AgentGraph {
 		return null;
 	}
 
-	public String getAgentName() {
-		return agentName;
-	}
 
-	public List<Node> getNodeList() {
-		return nodeList;
-	}
 
-	public List<Vertex> getVertexList() {
-		return vertexList;
-	}
 
-	public void setVertexList(List<Vertex> vertexList) {
-		this.vertexList = vertexList;
-	}
-	
-	
+
 	public void confirmeEdge(AID sender){
 		this.confirmedEdge.add(sender);
 	}
-	
-	public void deleteConfirmedEdges(AID sender) {
-		this.confirmedEdge.remove(sender);
-	}
-	
+
 	public void deleteAllConfirmedEdges() {
-		System.out.println("delete all");
 		this.confirmedEdge.clear();
 	}	
 	public int numberOfConfirmationEdges() {
 		return this.confirmedEdge.size();
 	}	
-	
+
 
 	@Override
 	public String toString() {
 		String graphString = "AgentGraph [agentName=" + agentName + ", node id and color:\n";
-		
+
 		for(Node node : nodeList)
 		{
 			graphString = graphString + node.toString() + "\n";
 		}
-		
+
 		return graphString;
 	}
 

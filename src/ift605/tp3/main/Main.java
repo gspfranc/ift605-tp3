@@ -9,22 +9,21 @@ import jade.core.ProfileImpl;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
-import jade.wrapper.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-	
+
 	private static AgentGraph agentGraphA;
 	private static AgentGraph agentGraphB;
 	private static AgentGraph agentGraphC;
-	
+
 	public static void main(String[] args) {
 		initGraph();
 		initAgent();
 	}
-	
+
 	private static void initGraph(){
 		// Agent_A
 		List<Node> nodesA = new ArrayList<Node>();
@@ -80,7 +79,7 @@ public class Main {
 		nodesB.add(b12);
 		vertexB.add(new Vertex(b12, b9, false));
 		vertexB.add(new Vertex(b12, b11, false));
-		
+
 		// Partial vertex for agent A and B
 		vertexB.add(Vertex.createEdgeVertex(b8, 3));
 		vertexA.add(Vertex.createEdgeVertex(a3, 8));
@@ -121,7 +120,7 @@ public class Main {
 		nodesC.add(c18);
 		vertexC.add(new Vertex(c18, c16, false));
 		vertexC.add(new Vertex(c18, c14, false));
-		
+
 		// Partial vertex for agent (A and C) and (B and C)
 		vertexC.add(Vertex.createEdgeVertex(c14, 7));
 		vertexA.add(Vertex.createEdgeVertex(a7, 14));
@@ -139,7 +138,7 @@ public class Main {
 		agentGraphB = new AgentGraph("agent_B", nodesB, vertexB);
 		agentGraphC = new AgentGraph("agent_C", nodesC, vertexC);
 	}
-	
+
 	private static void initAgent() {
 		jade.core.Runtime rt = jade.core.Runtime.instance();
 		Profile p = new ProfileImpl();
@@ -159,33 +158,34 @@ public class Main {
 			Object[] o3 = new Object[1];
 			o3[0] = agentGraphC;
 			AgentController ac3 = cc.createNewAgent("agent_C", ColorAgent.class.getName() , o3);
-			
+
 			ac3.start();
 			ac2.start();
 			ac1.start();
-		
-			while(true){
-			
-			if( ac1.getState().getName() == "Idle" 
-					&& ac2.getState().getName() == "Idle"
-					&& ac3.getState().getName() == "Idle"){
-				
-				System.out.println(agentGraphA);
-				System.out.println(agentGraphB);
-				System.out.println(agentGraphC);
-				ac1.kill();
-				ac2.kill();
-				ac3.kill();				
-				System.exit(0);
-			}
-			
-			
-			
-			}
-			
-			
 
-			
+			while(true){
+
+				if( ac1.getState().getName() == "Idle" 
+						&& ac2.getState().getName() == "Idle"
+						&& ac3.getState().getName() == "Idle"){
+					System.out.println("\n\n*** All the Agents are done negociating***");
+					System.out.println("*** A SOLUTION IS FOUND ***\n\n");
+					System.out.println(agentGraphA);
+					System.out.println(agentGraphB);
+					System.out.println(agentGraphC);
+					ac1.kill();
+					ac2.kill();
+					ac3.kill();				
+					System.exit(0);
+				}
+
+
+
+			}
+
+
+
+
 		} catch (StaleProxyException e1) {
 			e1.printStackTrace();
 		}

@@ -15,18 +15,8 @@ public enum Color implements Serializable{
 	public static Color getRandomColor()  {
 		return colorList.get(random.nextInt(colorList.size()));
 	}
-	
-	public static Color getOtherColor(Color color) {
-		if(color.equals(Color.GREEN)){
-			return Color.YELLOW;
-		}else if(color.equals(Color.BLUE)){
-			return Color.GREEN;
-		}else if(color.equals(Color.YELLOW)){
-			return Color.BLUE;
-		}
-		return null;
-	}
-	
+
+
 	public static String toString(Color color) {
 		if(color.equals(Color.GREEN)){
 			return "vert";

@@ -21,12 +21,12 @@ public class SenderColorEdgeBehaviour extends OneShotBehaviour {
 	@Override
 	public void action() {
 		List<String> otherAgentsName = graph.getOtherAgentsName();
-		
+
 		//Propose other agent of current nodes edge
 		for (String agentName : otherAgentsName) {
 			ACLMessage message = new ACLMessage(ACLMessage.PROPOSE);
 			message.addReceiver(new AID(agentName, AID.ISLOCALNAME));
-			
+
 			try {
 				message.setContentObject((Serializable) graph.getEdgeVertexForAgent(agentName));
 				this.myAgent.send(message);

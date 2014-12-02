@@ -16,7 +16,7 @@ public class ColorLocalNodeBehaviour extends SimpleBehaviour {
 	@Override
 	public void action() {
 		Node node = graph.getLocalNodeToColor();
-		
+
 		while(node != null) {
 			node.setColor(Color.getRandomColor());	
 			node = graph.getLocalNodeToColor();
@@ -27,7 +27,7 @@ public class ColorLocalNodeBehaviour extends SimpleBehaviour {
 	public boolean done() {
 		if(graph.getLocalNodeToColor() != null)
 			return false;
-		
+
 		this.myAgent.addBehaviour(new SenderColorEdgeBehaviour(graph));
 		return true;
 	}

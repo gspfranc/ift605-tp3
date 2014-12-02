@@ -10,10 +10,7 @@ public class ColorAgent extends Agent {
 		AgentGraph graph = (AgentGraph) getArguments()[0];
 		this.addBehaviour(new ColorLocalNodeBehaviour(graph));
 		this.addBehaviour(new ListenerColorEdgeBehavior(graph));
-	  }
-	
-	
-	
-	
-	
+	}
+
+
 }
