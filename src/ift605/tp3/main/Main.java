@@ -80,24 +80,19 @@ public class Main {
 		nodesB.add(b12);
 		vertexB.add(new Vertex(b12, b9, false));
 		vertexB.add(new Vertex(b12, b11, false));
-
+		
 		// Partial vertex for agent A and B
-		Vertex b8a3 = new Vertex(b8, a3,  true);
-		Vertex a3b10 = new Vertex(a3, b10,  true);
-		Vertex a5b9 = new Vertex(a5, b9,  true);
-		Vertex a6b9 = new Vertex(a6, b9,  true);
+		vertexB.add(Vertex.createEdgeVertex(b8, 3));
+		vertexA.add(Vertex.createEdgeVertex(a3, 8));
 
-		vertexB.add(b8a3);
-		vertexA.add(b8a3);
+		vertexB.add(Vertex.createEdgeVertex(b10, 3));
+		vertexA.add(Vertex.createEdgeVertex(a3, 10));
 
-		vertexB.add(a3b10);
-		vertexA.add(a3b10);
+		vertexB.add(Vertex.createEdgeVertex(b9, 5));
+		vertexA.add(Vertex.createEdgeVertex(a5, 9));
 
-		vertexB.add(a5b9);
-		vertexA.add(a5b9);
-
-		vertexB.add(a6b9);
-		vertexA.add(a6b9);
+		vertexB.add(Vertex.createEdgeVertex(b9, 6));
+		vertexA.add(Vertex.createEdgeVertex(a6, 9));
 
 		// Agent_C
 		List<Node> nodesC = new ArrayList<Node>();
@@ -126,24 +121,19 @@ public class Main {
 		nodesC.add(c18);
 		vertexC.add(new Vertex(c18, c16, false));
 		vertexC.add(new Vertex(c18, c14, false));
+		
+		// Partial vertex for agent (A and C) and (B and C)
+		vertexC.add(Vertex.createEdgeVertex(c14, 7));
+		vertexA.add(Vertex.createEdgeVertex(a7, 14));
 
-		// Partial vertex for agent A and C
-		Vertex a7c14 = new Vertex(a7, c14,  true);
-		Vertex a6c16 = new Vertex(a6, c16,  true);
-		Vertex b12c15 = new Vertex(b12, c15,  true);
-		Vertex b10c15 = new Vertex(b10, c15,  true);
+		vertexC.add(Vertex.createEdgeVertex(c16, 6));
+		vertexA.add(Vertex.createEdgeVertex(a6, 16));
 
-		vertexC.add(a7c14);
-		vertexA.add(a7c14);
+		vertexB.add(Vertex.createEdgeVertex(b12, 15));
+		vertexC.add(Vertex.createEdgeVertex(c15, 12));
 
-		vertexC.add(a6c16);
-		vertexA.add(a6c16);
-
-		vertexC.add(b12c15);
-		vertexB.add(b12c15);
-
-		vertexC.add(b10c15);
-		vertexB.add(b10c15);
+		vertexB.add(Vertex.createEdgeVertex(b10, 15));
+		vertexC.add(Vertex.createEdgeVertex(c15, 10));
 
 		agentGraphA = new AgentGraph("agent_A", nodesA, vertexA);
 		agentGraphB = new AgentGraph("agent_B", nodesB, vertexB);

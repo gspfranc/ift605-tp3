@@ -1,5 +1,6 @@
 package ift605.tp3.commons;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AgentGraph {
@@ -42,18 +43,45 @@ public class AgentGraph {
 		return node;
 	}
 	
-	public int getRemoteNodeId() {
+	public void eraseAll() {
+		for (Node n : nodeList) {
+			n.setColor(null);
+			n.setIsModifiable(true);
+		}
+	}
+	
+	public List<Vertex> getEdgeVertexForAgent(String agentName) {
+		List<Vertex> edgeNodes = new ArrayList<Vertex>();
+		
 		for(Vertex vertex : vertexList) {
 			if(vertex.isPartialVertex()) {
-				if(vertex.getNodeA().getColor() == null) {
-					return vertex.getNodeA().getId();
-				}else if(vertex.getNodeB().getColor() == null) {
-					return vertex.getNodeB().getId();
-				}
+				if(agentName.equals(Node.getNodeAgentName(vertex.getNodeB().getId()))) 
+					edgeNodes.add(vertex);
+			} 
+		}
+		return edgeNodes;
+	}
+	
+	public List<String> getOtherAgentsName(){
+		List<String> agentName = new ArrayList<String>();
+		
+		if (this.agentName != "agent_A")
+			agentName.add("agent_A");
+		if (this.agentName != "agent_B")
+			agentName.add("agent_B");
+		if (this.agentName != "agent_C")
+			agentName.add("agent_C");
+		
+		return agentName;
+	}
+	
+	public Node getNodeById(int id){
+		for(Node node : nodeList){
+			if(node.getId().equals(id)){
+				return node;
 			}
 		}
-		// No remote node id
-		return 0;
+		return null;
 	}
 
 	public String getAgentName() {

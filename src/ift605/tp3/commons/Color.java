@@ -1,11 +1,12 @@
 package ift605.tp3.commons;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public enum Color {
+public enum Color implements Serializable{
 	YELLOW, GREEN, BLUE;
 
 	private static final List<Color> colorList  = Collections.unmodifiableList(Arrays.asList(values()));

@@ -1,8 +1,11 @@
 package ift605.tp3.commons;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Vertex {
+public class Vertex implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private static final Random random = new Random();
 	
 	private Node nodeA;
@@ -38,6 +41,17 @@ public class Vertex {
 
 	public Node getNodeB() {
 		return nodeB;
+	}
+	
+	public static Vertex createEdgeVertex(Node nodeA, int getNodeUnknownId) {
+		if(nodeA == null || getNodeUnknownId == 0)
+			return null;
+		
+		Node partialNode = new Node(getNodeUnknownId);
+		partialNode.setColor(null);
+		partialNode.setIsModifiable(false);
+		
+		return new Vertex(nodeA, partialNode, true);
 	}
 
 	@Override
